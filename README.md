@@ -234,54 +234,60 @@ _[<img width="1856" height="1020" alt="image" src="https://github.com/user-attac
 
 > **Note:** Write 2–3 issues, even if small. This section is crucial — it demonstrates understanding and problem-solving.
 
-### Issue 1: [Write the exact error message or problem]
+### Issue 1: [ROS requirement not satisfied
+]
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[ROS2 installed on WSL
+
+Running scripts in Windows/Error Terminal]_
 
 **Fix:**  
 _[The exact command/config change you used to solve it]_
 
 ```bash
-[Your fix command/code here]
+[source /opt/ros/humble/setup.bash]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[AI assistant]_
 
 ---
 
-### Issue 2: [Another real error or roadblock]
+### Issue 2: [No module named 'catkin_pkg']
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[colcon build was run with Python venv activated]_
 
 **Fix:**  
 _[The exact command/config change you used to solve it]_
 
 ```bash
-[Your fix command/code here]
+[sudo apt install -y python3-catkin-pkg]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[AI assistant]_
 
 ---
 
-### Issue 3 (Optional): [Title]
+### Issue 3 (Optional): [Multiple repositories were cloned, resulting in disordered paths.]
 
 **Cause / diagnosis:**  
-_[Explain what you think caused it]_
+_[The smoke test/colcon was running between different warehouses.
+
+The environment variables were inconsistent.]_
 
 **Fix:**  
 _[The exact command/config change you used to solve it]_
 
 ```bash
-[Your fix command/code here]
+[rm -rf PolyU-AAE5303-env-smork-test
+]
 ```
 
 **Reference:**  
-_[Official ROS docs? StackOverflow? AI assistant? Something else?]_
+_[ AI assistant]_
 
 ---
 
