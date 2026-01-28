@@ -301,14 +301,25 @@ Choose one of the issues above and document how you used AI to solve it.
 
 **Your prompt:**
 ```
-[Copy-paste your actual message to the AI, not a summary]
+[为什么我的ROS2已经安装但检测不到，catkin_pkg找不到，该怎么解决这些问题]
 ```
 
 ### 5.2 Key helpful part of the AI's answer
 
 **AI's response (relevant part only):**
 ```
-[Quote only the relevant part of the AI's answer]
+[# 1) 安装 ROS2 构建所需系统依赖
+sudo apt update
+sudo apt install -y python3-catkin-pkg python3-colcon-common-extensions
+
+# 2) 进入 ROS2 workspace 并清理旧构建产物
+cd ~/aae5303-env-check/ros2_ws
+rm -rf build install log
+
+# 3) source ROS2 并重新编译
+source /opt/ros/humble/setup.bash
+colcon build --packages-select env_check_pkg --event-handlers console_direct+
+]
 ```
 
 ### 5.3 What you changed or ignored and why
@@ -319,18 +330,43 @@ Explain briefly:
 - Did you double-check with official docs?
 
 **Your explanation:**  
-_[Write your analysis here]_
+_[AI did not recommend unsafe content.The commands provided mainly involve system package installation (apt install) and cleanup of the workspace (deleting build/install/log), which are routine and controllable environment configuration operations. The deletion commands (such as rm -rf build install log or deleting duplicate repository directories) all involve project files in the user's directory and do not involve critical system directories.
+The solution has been modified.
+
+Based on the actual error path showing `execute_process(.../.venv/bin/python3 ...)`, I stopped trying to build ROS2 within the venv instance. Instead, I performed a colcon build in a new terminal without an activated venv instance, and strictly changed the execution directory of the colcon build to `ros2_ws/`. Furthermore, I abandoned using `ros2 --version` to check the installation status and instead used `ros2 run demo_nodes_*` or `ros2 pkg list` to verify it.]_
 
 ### 5.4 Final solution you applied
 
 Show the exact command or file edit that fixed the problem:
 
 ```bash
-[Your final command/code here]
+[
+sudo apt update
+sudo apt install -y python3-catkin-pkg python3-colcon-common-extensions
+
+cd ~/aae5303-env-check/ros2_ws
+rm -rf build install log
+
+source /opt/ros/humble/setup.bash
+colcon build --packages-select env_check_pkg --event-handlers console_direct+
+
+# 4) source 工作空间并运行（两个终端分别运行 talker/listener）
+source install/setup.bash
+ros2 run env_check_pkg listener
+# 在另一个新终端中：
+source /opt/ros/humble/setup.bash
+cd ~/aae5303-env-check/ros2_ws
+source install/setup.bash
+ros2 run env_check_pkg talker
+
+rm -rf ~/PolyU-AAE5303-env-smork-test]
 ```
 
 **Why this worked:**  
-_[Brief explanation]_
+_[`python3-catkin-pkg` and `colcon` are system dependencies in the ROS2 build chain. Installing them using `apt` ensures consistency with the system's Python/ROS2 environment.
+Running `colcon build` under `ros2_ws/` and cleaning up `build/install/log` avoids secondary failures caused by old caches and incorrect paths.
+Avoid building ROS2 in `.venv` files to prevent `ament/colcon` from mistakenly using `.venv/bin/python3`, causing dependencies to be invisible and resolving `catkin_pkg` missing errors at the root.
+Using `ros2 run env_check_pkg listener/talker` (without `.py`) conforms to ROS2's "run installed executable targets" mechanism, ensuring that executables are correctly discovered and run.]_
 
 ---
 
@@ -345,7 +381,7 @@ Short but thoughtful:
 
 **Your reflection:**
 
-_[Write your 3-5 sentence reflection here]_
+_[I learned that configuring a robotics environment is often more about managing system environments and dependencies than writing code, especially when mixing ROS2 and Python virtual environments. I was surprised that activating a Python virtual environment could silently break ROS2 builds by redirecting the Python interpreter used by colcon and ament. Next time, I will clearly separate system-level ROS installations from Python project environments, read full error logs before acting, and provide more precise context when asking AI for help. After resolving these issues, I feel confident in debugging common ROS/Python environment and build problems.]_
 
 ---
 
@@ -354,27 +390,26 @@ _[Write your 3-5 sentence reflection here]_
 ✅ **I confirm that I performed this setup myself and all screenshots/logs reflect my own environment.**
 
 **Name:**  
-_[Your name]_
+_[ZhongZiyi]_
 
 **Student ID:**  
-_[Your student ID]_
+_[25075125G]_
 
 **Date:**  
-_[Date of submission]_
+_[2026/1/28]_
 
 ---
 
 ## Submission Checklist
 
 Before submitting, ensure you have:
-
-- [ ] Filled in all system information
-- [ ] Included actual terminal outputs (not just screenshots)
-- [ ] Provided at least 2 screenshots (Python tests + ROS talker/listener)
-- [ ] Documented 2–3 real problems with solutions
-- [ ] Completed the AI usage section with exact prompts
-- [ ] Written a thoughtful reflection (3–5 sentences)
-- [ ] Signed the declaration
+- [✓] Filled in all system information
+- [✓] Included actual terminal outputs (not just screenshots)
+- [✓] Provided at least 2 screenshots (Python tests + ROS talker/listener)
+- [✓] Documented 2–3 real problems with solutions
+- [✓] Completed the AI usage section with exact prompts
+- [✓] Written a thoughtful reflection (3–5 sentences)
+- [✓] Signed the declaration
 
 ---
 
