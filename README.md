@@ -166,7 +166,10 @@ Summary: 1 package finished [x.xx s]
 
 **Your actual output:**
 ```
-[Paste your build summary here]
+[Starting >>> env_check_pkg
+Finished <<< env_check_pkg [0.18s]                
+
+Summary: 1 package finished [0.49s]]
 ```
 
 ### 3.2 Run talker and listener
@@ -185,7 +188,15 @@ ros2 run env_check_pkg talker.py
 
 **Output (3–4 lines):**
 ```
-[Paste 3-4 lines of talker output here]
+[[INFO] [1769574251.943347507] [env_check_pkg_talker]: AAE5303 talker ready (publishing at 2 Hz).
+[INFO] [1769574252.443597536] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #0'
+[INFO] [1769574252.921798494] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #1'
+[INFO] [1769574253.400790077] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #2'
+[INFO] [1769574253.880079055] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #3'
+[INFO] [1769574254.358932097] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #4'
+[INFO] [1769574254.837871464] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #5'
+[INFO] [1769574255.317026212] [env_check_pkg_talker]: Publishing: 'AAE5303 hello #6'
+^C[INFO] [1769574255.411294748] [rclcpp]: signal_handler(SIGINT/SIGTERM)]
 ```
 
 **Run listener:**
@@ -195,7 +206,14 @@ ros2 run env_check_pkg listener.py
 
 **Output (3–4 lines):**
 ```
-[Paste 3-4 lines of listener output here]
+[[INFO] [1769574462.642234758] [env_check_pkg_listener]: AAE5303 listener awaiting messages.
+[INFO] [1769574462.797713943] [env_check_pkg_listener]: I heard: 'AAE5303 hello #51'
+[INFO] [1769574463.276951103] [env_check_pkg_listener]: I heard: 'AAE5303 hello #52'
+[INFO] [1769574463.755695727] [env_check_pkg_listener]: I heard: 'AAE5303 hello #53'
+[INFO] [1769574464.234792437] [env_check_pkg_listener]: I heard: 'AAE5303 hello #54'
+[INFO] [1769574464.714016567] [env_check_pkg_listener]: I heard: 'AAE5303 hello #55'
+[INFO] [1769574465.192678703] [env_check_pkg_listener]: I heard: 'AAE5303 hello #56'
+[INFO] [1769574465.672170706] [env_check_pkg_listener]: I heard: 'AAE5303 hello #57']
 ```
 
 **Alternative (using launch file):**
@@ -206,7 +224,8 @@ ros2 launch env_check_pkg env_check.launch.py
 **Screenshot:**  
 _[Include one screenshot showing talker + listener running]_
 
-![Talker and Listener Running](path/to/your/screenshot.png)
+![Talker and Listener Running](<img width="1856" height="1020" alt="image" src="https://github.com/user-attachments/assets/ae36186a-0d1b-4340-964e-3d4f4fab078c" />
+)
 
 ---
 
